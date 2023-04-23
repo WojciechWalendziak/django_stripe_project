@@ -1,6 +1,6 @@
-from django.http.response import HttpResponseNotFound, JsonResponse
+from django.http.response import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from .models import *
 from django.views.generic import ListView, CreateView, DetailView, TemplateView
 import stripe
@@ -13,7 +13,6 @@ from django.contrib.auth.decorators import login_required
 import json
 
 
-# Create your views here.
 class BookListView(ListView):
     model = Book
     template_name = "book_list.html"
@@ -41,7 +40,6 @@ class BookDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(BookDetailView, self).get_context_data(**kwargs)
-        #context['stripe_publishable_key'] = settings.STRIPE_PUBLISHABLE_KEY
         return context
 
 
@@ -85,7 +83,6 @@ def create_checkout_session(request, id):
     order.book = chosen_book
     print(vars(checkout_session))
     print(checkout_session)
-    #order.stripe_payment_intent = checkout_session['payment_intent']
     order.amount = int(chosen_book.price * 100)
     order.save()
 
