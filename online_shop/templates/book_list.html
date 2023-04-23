@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center">Book List</h1>
+<div class="container">
+    {% if book_list %}
+    <div class="row">
+
+        {% for book in book_list %}
+        <div class="col-sm-4">
+            <div class="card">
+                <img class="card-img-top" src="" alt="">
+                <div class="card-body">
+                    <h4 class="card-title">{{ book.name }}</h4>
+                    <p class="card-text">{{ book.quantity }}</p>
+                    <p class="card-text">{{ book.description }}</p>
+                </div>
+                {% if book.quantity > 0 %}
+                <div class="card-footer d-flex">
+                    <a href="{% url 'detail' id=book.id %}" class="btn btn-success ml-auto">Buy Now</a>
+                </div>
+                {% else %}
+                <div class="card-footer d-flex">
+                    <a class="card-text">Not Available</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+    {% else %}
+    <div class="alert alert-info text-center mt-5">
+        The book list is empty. Please add some books first.
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}

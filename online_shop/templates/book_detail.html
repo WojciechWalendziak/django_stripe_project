@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1 class="text-center">Book Detail</h1>
+<div class="container">
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Book Detail</h2>
+        </div>
+        <div class="card-body">
+            <div class="container row">
+                <div class="col-md-2">
+                    <img src="https://dummyimage.com/150x150.gif?text={{ object.name }}" alt="">
+                </div>
+                <div class="col-md-10">
+                    <h1>Name: {{ object.name }}</h1>
+                    <p>Description: {{ object.description }}</p>
+                    <p>Price: {{ object.price }}</p>
+
+                    <div class="form-group">
+                        <label for="email">Email: </label>
+                        <input type="email" name="email" id="email" class="form-control" placeholder="Email">
+                        <small>Please enter your email address</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer d-flex">
+            <button class="btn btn-success ml-auto" id="checkout-button">Checkout</button>
+        </div>
+    </div>
+</div>
+<!-- Add JavaScript Here-->
+<script src="https://js.stripe.com/v3/"></script>
+	<script src="{% static 'main.js' %}"
+	defer
+        data-book_id="{{ object.id }}">
+    </script>
+<script>console.log("{{ object.id }}")</script>
+{% endblock content %}
